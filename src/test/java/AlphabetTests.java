@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AlphabetTest {
+class AlphabetTests {
     private static Alphabet alphabet;
     private static List<Character> alphabetChars;
 

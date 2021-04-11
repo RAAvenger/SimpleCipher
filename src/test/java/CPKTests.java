@@ -3,12 +3,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 class CPKTests {
-    private static CPK cpk;
+    private final CPK cpk;
 
-    @BeforeAll
-    public static void setup() {
+    public CPKTests() {
         cpk = new CPK("", "", null, true);
     }
 
@@ -32,5 +32,20 @@ class CPKTests {
         key.put('C', 'c');
         String testResult = cpk.keyToString(key, false);
         Assertions.assertEquals(expectedResult, testResult);
+    }
+
+    @Test
+    void testEqualsTestSameObject() {
+        Assertions.assertEquals(cpk, cpk);
+    }
+
+    @Test
+    void testEqualsTestNull() {
+        Assertions.assertFalse(cpk.equals(null));
+    }
+
+    @Test
+    void testHashCode() {
+        Assertions.assertEquals(Objects.hash("", "", ""), cpk.hashCode());
     }
 }
