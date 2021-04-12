@@ -3,20 +3,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class Cipher {
+public class CipherSimpleSubstitution {
     protected String plainText;
     protected String cipherText;
     protected HashMap<Character, Character> key;
 
-    protected Cipher() {
+    protected CipherSimpleSubstitution() {
     }
 
     public static CPK encrypt(String plainText) {
-        Cipher cipher = new Cipher();
+        CipherSimpleSubstitution cipher = new CipherSimpleSubstitution();
         cipher.plainText = plainText;
         cipher.key = cipher.generateKey();
         cipher.cipherText = cipher.encryptPlainText();
-        return new CPK(cipher.plainText, cipher.cipherText, cipher.key, true);
+        return new CPK(cipher.cipherText, cipher.plainText, cipher.key, true);
     }
 
     private HashMap<Character, Character> generateKey() {
@@ -42,11 +42,11 @@ public class Cipher {
     }
 
     public static CPK decrypt(String cipherText, String key) {
-        Cipher cipher = new Cipher();
+        CipherSimpleSubstitution cipher = new CipherSimpleSubstitution();
         cipher.cipherText = cipherText;
         cipher.key = cipher.extractKey(key);
         cipher.plainText = cipher.decryptCipherText();
-        return new CPK(cipher.cipherText, cipher.plainText, cipher.key, false);
+        return new CPK(cipher.cipherText, cipher.plainText, key);
     }
 
     private HashMap<Character, Character> extractKey(String keyString) {

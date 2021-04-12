@@ -1,17 +1,13 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.security.Key;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+class CipherSimpleSubstitutionTests {
+    private final CipherSimpleSubstitution cipher;
 
-class CipherTests {
-    private final Cipher cipher;
-
-    public CipherTests() {
-        cipher = new Cipher();
+    public CipherSimpleSubstitutionTests() {
+        cipher = new CipherSimpleSubstitution();
         cipher.key = new HashMap<>();
         cipher.key.put('a', 'A');
         cipher.key.put('b', 'B');
@@ -36,8 +32,8 @@ class CipherTests {
 
     @Test
     void decryptTest() {
-        CPK expectedResult = new CPK("bbaacab", "BBAACAB", cipher.key, false);
-        CPK testResult = Cipher.decrypt(expectedResult.cipherText, expectedResult.key);
+        var expectedResult = CipherSimpleSubstitution.encrypt("bbaacab");
+        var testResult = CipherSimpleSubstitution.decrypt(expectedResult.cipherText, expectedResult.key);
         Assertions.assertEquals(expectedResult, testResult);
     }
 }

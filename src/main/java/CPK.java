@@ -6,13 +6,18 @@ public class CPK {
     public String cipherText;
     public String key;
 
+    public CPK(String cipherText, String plainText, String key) {
+        this.plainText = plainText;
+        this.cipherText = cipherText;
+        this.key = key;
+    }
+
     public CPK(String cipherText, String plainText, HashMap<Character, Character> key, boolean keyIsEncryptionKey) {
         if (key == null)
             key = new HashMap<>();
         this.plainText = plainText;
         this.cipherText = cipherText;
         this.key = keyToString(key, keyIsEncryptionKey);
-
     }
 
     protected String keyToString(HashMap<Character, Character> key, boolean orderIsKeyThenValue) {
