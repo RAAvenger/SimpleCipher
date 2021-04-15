@@ -13,7 +13,7 @@ class CipherSimpleTranspositionTests {
     @Test
     void getPageSizeTest() {
         var expectedResult = 3;
-        var testResult = cipher.getPageSize("this is test");
+        var testResult = cipher.calculatePageSize(12);
         Assertions.assertEquals(expectedResult, testResult);
     }
 
@@ -27,8 +27,8 @@ class CipherSimpleTranspositionTests {
 
     @Test
     void decryptTest() {
-        var expectedResult = CipherSimpleTransposition.encrypt("this is test");
-        var testResult = CipherSimpleTransposition.decrypt(expectedResult.cipherText, expectedResult.key);
+        var expectedResult = cipher.encrypt("this is test");
+        var testResult = cipher.decrypt(expectedResult.cipherText, expectedResult.key);
         Assertions.assertEquals(expectedResult, testResult);
     }
 

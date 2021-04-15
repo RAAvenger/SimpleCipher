@@ -5,35 +5,44 @@ import java.util.HashMap;
 
 class CipherSimpleSubstitutionTests {
     private final CipherSimpleSubstitution cipher;
+    private final HashMap<Character, Character> key;
 
     public CipherSimpleSubstitutionTests() {
         cipher = new CipherSimpleSubstitution();
-        cipher.key = new HashMap<>();
-        cipher.key.put('a', 'A');
-        cipher.key.put('b', 'B');
-        cipher.key.put('c', 'C');
+        key = new HashMap<>();
+        key.put('a', 'A');
+        key.put('b', 'B');
+        key.put('c', 'C');
     }
 
     @Test
-    void encryptPlainTextTest() {
+    void replaceCharactersUsingKeyTest() {
         String expectedResult = "BBAACAB";
-        cipher.plainText = "bbaacab";
-        String testResult = cipher.encryptPlainText();
+        String testResult = cipher.replaceCharactersUsingKey("bbaacab", key);
         Assertions.assertEquals(expectedResult, testResult);
     }
 
     @Test
-    void decryptCipherTextTest() {
-        String expectedResult = "BBAACAB";
-        cipher.cipherText = "bbaacab";
-        String testResult = cipher.decryptCipherText();
+    void keyToStringTest() {
+        String expectedResult = "aAbBcC";
+        HashMap<Character, Character> key = new HashMap<>();
+        key.put('a', 'A');
+        key.put('b', 'B');
+        key.put('c', 'C');
+        String testResult = cipher.keyToString(key);
         Assertions.assertEquals(expectedResult, testResult);
     }
 
     @Test
     void decryptTest() {
-        var expectedResult = CipherSimpleSubstitution.encrypt("bbaacab");
-        var testResult = CipherSimpleSubstitution.decrypt(expectedResult.cipherText, expectedResult.key);
+        var expectedResult = cipher.encrypt("bbaacab");
+        var testResult = cipher.decrypt(expectedResult.cipherText, expectedResult.key);
         Assertions.assertEquals(expectedResult, testResult);
+    }
+
+    @Test
+    void extractDescriptionKeyTest() {
+        var testResult = cipher.extractDescriptionKey("AaBbCc");
+        Assertions.assertEquals(key, testResult);
     }
 }
