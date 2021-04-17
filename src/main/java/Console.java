@@ -1,8 +1,11 @@
-import java.text.Format;
 import java.util.Scanner;
 
 public class Console {
     private final Scanner scanner;
+
+    public Console() {
+        scanner = new Scanner(System.in);
+    }
 
     public static void main(String[] args) {
         var console = new Console();
@@ -17,10 +20,6 @@ public class Console {
         } catch (Exception exception) {
             System.out.println("Sorry something went wrong!");
         }
-    }
-
-    public Console() {
-        scanner = new Scanner(System.in);
     }
 
     private boolean getUserChoice() {
